@@ -1,6 +1,6 @@
 extends Node2D
 
-const asteroid = preload("res://Asteroid.tscn")
+const asteroid = preload("res://Asteroid/Asteroid.tscn")
 
 onready var size = get_viewport().size
 
@@ -17,10 +17,10 @@ func _ready():
 	
 	player.connect("kill", self, "kill_player")
 	
-	for i in range(7):
+	for _i in range(7):
 		build_asteroid(true, true, null)
 
-func _process(delta):
+func _process(_delta):
 	if not alive and Input.is_action_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 
@@ -35,7 +35,7 @@ func kill_player():
 func hit(asteroid_area, pos, large):
 	# Play explode
 	if large:
-		for i in range(3):
+		for _i in range(3):
 			build_asteroid(false, false, pos)
 
 	asteroid_area.queue_free()

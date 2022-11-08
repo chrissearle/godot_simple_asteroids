@@ -2,7 +2,7 @@ extends Area2D
 
 const rotation_amount = 2
 
-const bullet = preload("res://Bullet.tscn")
+const bullet = preload("res://Player/Bullet.tscn")
 
 onready var tip = $Tip
 
