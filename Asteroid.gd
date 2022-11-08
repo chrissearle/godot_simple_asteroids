@@ -17,9 +17,11 @@ export var speed_max = 100
 var direction = Vector2.ZERO
 var rotation_speed = 0
 
+signal hit(area, position, large)
+
 func _ready():
 	randomize()
-	
+
 	rand_sprite()
 
 	current_sprite.rotation = randf() * TAU
@@ -27,6 +29,12 @@ func _ready():
 	direction = Vector2(build_direction(), build_direction())
 	
 	rotation_speed = (2 * rotation_max * randf()) - rotation_max
+
+func change_size(large):
+	is_large = large
+
+	rand_sprite()
+
 
 func rand_sprite():
 	var choose_a = randi() % 2 == 0
@@ -59,15 +67,8 @@ func _process(delta):
 func build_direction():
 	return (1.0 - randf() * 2) * speed_max * (1.0 + randf())
 
-
 func _on_Asteroid_area_entered(area):
 	if area.is_in_group("Bullet"):
+		# Remove bullet
 		area.queue_free()
-		if is_large:
-			is_large = false
-			get_parent().explode_sound()
-			rand_sprite()
-		else:
-			get_parent().explode_sound()
-			queue_free()
-
+		emit_signal("hit", self, global_position, is_large)

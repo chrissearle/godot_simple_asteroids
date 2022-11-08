@@ -1,10 +1,12 @@
 extends Area2D
 
-const rotation_amount = 1
+const rotation_amount = 2
 
 const bullet = preload("res://Bullet.tscn")
 
 onready var tip = $Tip
+
+signal kill
 
 func _process(delta):
 	
@@ -32,4 +34,4 @@ func _process(delta):
 
 func _on_Player_area_entered(area):
 	if area.is_in_group("Asteroid"):
-		get_parent().kill_player()
+		emit_signal("kill")
