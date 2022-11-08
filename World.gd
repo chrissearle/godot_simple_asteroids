@@ -7,10 +7,11 @@ onready var size = get_viewport().size
 onready var player = $Player
 onready var fire_sound_player = $FireSoundPlayer
 onready var kill_sound_player = $KillSoundPlayer
-
-var alive = true
+onready var label_container = $LabelContainer
 
 func _ready():
+	label_container.visible = false
+
 	player.position = size / 2
 	
 	randomize()
@@ -21,7 +22,7 @@ func _ready():
 		build_asteroid(true, true, null)
 
 func _process(_delta):
-	if not alive and Input.is_action_pressed("ui_accept"):
+	if label_container.visible and Input.is_action_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 
 func fire_sound():
@@ -29,7 +30,7 @@ func fire_sound():
 
 func kill_player():
 	kill_sound_player.play()
-	alive = false
+	label_container.visible = true
 	player.queue_free()
 
 func hit(asteroid_area, pos, large):

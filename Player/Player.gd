@@ -1,6 +1,5 @@
 extends Area2D
 
-const rotation_amount = 2
 
 const bullet = preload("res://Player/Bullet.tscn")
 
@@ -8,19 +7,22 @@ onready var tip = $Tip
 
 signal kill
 
+export var speed_max = 200
+export var rotation_max = 3
+
 func _process(delta):
 	
 	var rotate_input = Input.get_axis("ui_left", "ui_right")
 	
-	rotation += rotation_amount * rotate_input * delta
+	rotation += rotation_max * rotate_input * delta
 	
 	rotation = fmod(rotation, TAU)
 
 	var acceleration = Input.get_action_strength("ui_up")
 	
 	if acceleration > 0:
-		var y = -100 * cos(rotation)
-		var x = 100 * sin(rotation)
+		var y = -speed_max * cos(rotation)
+		var x = speed_max * sin(rotation)
 		
 		position += Vector2(x, y) * delta
 
