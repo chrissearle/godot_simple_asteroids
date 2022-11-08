@@ -26,4 +26,16 @@ polygon = PoolVector2Array( 0, -21, 8, 10, 0, 24, -8, 10 )
 [node name="Tip" type="Node2D" parent="."]
 position = Vector2( 0, -32 )
 
+[node name="Exhaust" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 13 )
+amount = 250
+lifetime = 1.5
+local_coords = false
+direction = Vector2( 0, 1 )
+spread = 15.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+linear_accel = 20.0
+linear_accel_random = 1.0
+
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]

@@ -4,11 +4,15 @@ extends Area2D
 const bullet = preload("res://Player/Bullet.tscn")
 
 onready var tip = $Tip
+onready var exhaust = $Exhaust
 
 signal kill
 
 export var speed_max = 200
 export var rotation_max = 3
+
+func _ready():
+	exhaust.emitting = false
 
 func _process(delta):
 	
@@ -21,10 +25,14 @@ func _process(delta):
 	var acceleration = Input.get_action_strength("ui_up")
 	
 	if acceleration > 0:
+		exhaust.emitting = true
 		var y = -speed_max * cos(rotation)
 		var x = speed_max * sin(rotation)
 		
 		position += Vector2(x, y) * delta
+	else:
+		exhaust.emitting = false
+
 
 	if Input.is_action_just_pressed("ui_select"):
 		var bullet_instance = bullet.instance()
