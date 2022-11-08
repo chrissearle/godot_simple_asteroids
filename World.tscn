@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sounds/die.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/LaserCorps.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://Sounds/boom.wav" type="AudioStream" id=6]
+[ext_resource path="res://TimeDisplay.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -41,3 +42,5 @@ custom_fonts/font = SubResource( 1 )
 text = "Press Space to Restart"
 align = 1
 valign = 1
+
+[node name="TimeDisplay" parent="." instance=ExtResource( 7 )]

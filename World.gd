@@ -9,8 +9,10 @@ onready var fire_sound_player = $FireSoundPlayer
 onready var kill_sound_player = $KillSoundPlayer
 onready var boom_sound_player = $BoomSoundPlayer
 onready var label_container = $LabelContainer
+onready var time_display = $TimeDisplay
 
 var asteroid_count = 0
+var time_elapsed := 0.0
 
 func _ready():
 	label_container.visible = false
@@ -23,15 +25,23 @@ func _ready():
 	
 	for _i in range(7):
 		build_asteroid(true, true, null)
+	
+	time_elapsed = 0.0
 
-func _process(_delta):
+func _process(delta):	
 	if asteroid_count == 0:
 		label_container.visible = true
+	
+	if not label_container.visible:
+		time_elapsed += delta
+	
+	time_display.set_time(time_elapsed / 60, fmod(time_elapsed, 60), fmod(time_elapsed, 1) * 100)
 	
 	if label_container.visible and Input.is_action_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 
-func fire_sound():
+func bullet_fired():
+	time_elapsed += 5
 	fire_sound_player.play()
 
 func kill_player():

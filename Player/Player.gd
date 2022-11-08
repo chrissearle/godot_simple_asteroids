@@ -39,7 +39,7 @@ func _process(delta):
 		bullet_instance.global_position = tip.global_position
 		bullet_instance.set_direction(rotation)
 		get_parent().add_child(bullet_instance)
-		get_parent().fire_sound()
+		get_parent().bullet_fired()
 
 
 func _on_Player_area_entered(area):
