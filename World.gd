@@ -4,18 +4,23 @@ const asteroid = preload("res://Asteroid/Asteroid.tscn")
 
 onready var size = get_viewport().size
 
-onready var player = $Player
-onready var fire_sound_player = $FireSoundPlayer
-onready var kill_sound_player = $KillSoundPlayer
-onready var boom_sound_player = $BoomSoundPlayer
-onready var label_container = $LabelContainer
-onready var time_display = $TimeDisplay
+onready var player: = $Player
+onready var fire_sound_player: = $FireSoundPlayer
+onready var kill_sound_player: = $KillSoundPlayer
+onready var boom_sound_player: = $BoomSoundPlayer
+onready var restart_label: = $RestartLabel
+onready var time_display: = $TimeDisplay
+onready var final_time_label: = $FinalTime
 
 var asteroid_count = 0
 var time_elapsed := 0.0
 
+export var start_count = 7
+export var break_count = 3
+
 func _ready():
-	label_container.visible = false
+	restart_label.visible = false
+	final_time_label.visible = false
 
 	player.position = size / 2
 	
@@ -23,21 +28,28 @@ func _ready():
 	
 	player.connect("kill", self, "kill_player")
 	
-	for _i in range(7):
+	for _i in range(start_count):
 		build_asteroid(true, true, null)
 	
 	time_elapsed = 0.0
 
-func _process(delta):	
-	if asteroid_count == 0:
-		label_container.visible = true
+func _process(delta):
+	var minutes = time_elapsed / 60
+	var seconds = fmod(time_elapsed, 60)
+	var milliseconds = fmod(time_elapsed, 1) * 100
 	
-	if not label_container.visible:
+	if asteroid_count == 0:
+		restart_label.visible = true
+		final_time_label.visible = true
+		player.visible = false
+		final_time_label.text = "Time %02d:%02d:%02d" % [minutes, seconds, milliseconds]
+	
+	if not restart_label.visible:
 		time_elapsed += delta
 	
-	time_display.set_time(time_elapsed / 60, fmod(time_elapsed, 60), fmod(time_elapsed, 1) * 100)
+	time_display.set_time(minutes, seconds, milliseconds)
 	
-	if label_container.visible and Input.is_action_pressed("ui_accept"):
+	if restart_label.visible and Input.is_action_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 
 func bullet_fired():
@@ -46,13 +58,13 @@ func bullet_fired():
 
 func kill_player():
 	kill_sound_player.play()
-	label_container.visible = true
+	restart_label.visible = true
 	player.queue_free()
 
 func hit(asteroid_area, pos, large):
 	boom_sound_player.play()
 	if large:
-		for _i in range(3):
+		for _i in range(break_count):
 			build_asteroid(false, false, pos)
 
 	asteroid_count -= 1
