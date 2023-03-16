@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bffpo2c8jgu7m"]
 
-[ext_resource type="Texture2D" uid="uid://b4gdwhxk31m0h" path="res://Assets/simpleSpace_tilesheet.png" id="1_1cbku"]
+[ext_resource type="Texture2D" uid="uid://d0cc1eyfbracw" path="res://Assets/simpleSpace_tilesheet.png" id="1_1cbku"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_rel34"]
-[ext_resource type="AudioStream" uid="uid://dnyuh57f4shw6" path="res://Sounds/engine.wav" id="3_htrw0"]
+[ext_resource type="AudioStream" uid="uid://dkrqogpat7ia2" path="res://Sounds/engine.wav" id="3_htrw0"]
 
 [node name="Player" type="Area2D"]
 collision_mask = 0
