@@ -1,74 +1,40 @@
+class_name Asteroid
+
 extends Area2D
 
-onready var large_sprite_a: = $LargeSpriteA
-onready var large_sprite_b: = $LargeSpriteB
-onready var small_sprite_a: = $SmallSpriteA
-onready var small_sprite_b: = $SmallSpriteB
+@export var rotation_max: = 3.0
+@export var speed_max: = 100
 
-onready var large_collision_shape: = $LargeCollisionShape
-onready var small_collision_shape: = $SmallCollisionShape
+@export var large = true
 
-var current_sprite
-var is_large = true
+@onready var screen_size: Vector2i = get_viewport().size
 
-export var rotation_max = 3.0
-export var speed_max = 100
+var direction: = Vector2.ZERO
+var rotation_speed: = 0
 
-var direction = Vector2.ZERO
-var rotation_speed = 0
+signal kill
 
-signal hit(area, position, large)
-
-func _ready():
+func _ready() -> void:
 	randomize()
 
-	rand_sprite()
-
-	current_sprite.rotation = randf() * TAU
+	rotation = randf() * TAU
 	
-	direction = Vector2(build_direction(), build_direction())
+	direction = Vector2(build_random_direction(), build_random_direction())
 	
 	rotation_speed = (2 * rotation_max * randf()) - rotation_max
 
-func change_size(large):
-	is_large = large
-
-	rand_sprite()
-
-
-func rand_sprite():
-	var choose_a = randi() % 2 == 0
-	
-	if is_large:
-		small_collision_shape.disabled = true
-		
-		if choose_a:
-			current_sprite = large_sprite_a
-		else:
-			current_sprite = large_sprite_b
-	else:
-		large_collision_shape.disabled = true
-		
-		if choose_a:
-			current_sprite = small_sprite_a
-		else:
-			current_sprite = small_sprite_b
-	
-	current_sprite.visible = true
-	
-	for s in [small_sprite_a, small_sprite_b, large_sprite_a, large_sprite_b]:
-		if not s == current_sprite:
-			s.visible = false
-
-func _process(delta):
+func _process(delta: float) -> void:
 	position += direction * delta
-	current_sprite.rotation += rotation_speed * delta
-
-func build_direction():
+	rotation += rotation_speed * delta
+	
+	screen_wrap()
+	
+func build_random_direction() -> float:
 	return (1.0 - randf() * 2) * speed_max * (1.0 + randf())
 
-func _on_Asteroid_area_entered(area):
-	if area.is_in_group("Bullet"):
-		# Remove bullet
-		area.queue_free()
-		emit_signal("hit", self, global_position, is_large)
+func screen_wrap() -> void:
+	position.x = wrapf(position.x, 0, screen_size.x)
+	position.y = wrapf(position.y, 0, screen_size.y)
+
+func _on_area_entered(area: Area2D) -> void:
+	emit_signal("kill")

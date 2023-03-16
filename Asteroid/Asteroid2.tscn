@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://clgnysxypvo36"]
+[gd_scene load_steps=4 format=3 uid="uid://b0d2bfovj2t64"]
 
-[ext_resource type="Script" path="res://Asteroid/Asteroid.gd" id="1_lh21i"]
-[ext_resource type="Texture2D" uid="uid://b4gdwhxk31m0h" path="res://Assets/simpleSpace_tilesheet.png" id="2_lyspt"]
+[ext_resource type="Script" path="res://Asteroid/Asteroid.gd" id="1_7lof2"]
+[ext_resource type="Texture2D" uid="uid://b4gdwhxk31m0h" path="res://Assets/simpleSpace_tilesheet.png" id="2_jg250"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xvv6y"]
 radius = 21.0
 
 [node name="Asteroid" type="Area2D"]
 collision_layer = 2
-script = ExtResource("1_lh21i")
+script = ExtResource("1_7lof2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_lyspt")
+texture = ExtResource("2_jg250")
 region_enabled = true
-region_rect = Rect2(0, 256, 64, 64)
+region_rect = Rect2(128, 256, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xvv6y")
