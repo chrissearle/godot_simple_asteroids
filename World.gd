@@ -4,14 +4,16 @@ const asteroids = [
 	preload("res://Asteroid/Asteroid.tscn"),
 	preload("res://Asteroid/Asteroid2.tscn"),
 	preload("res://Asteroid/Asteroid3.tscn"),
-	preload("res://Asteroid/Asteroid4.tscn")
+	preload("res://Asteroid/Asteroid4.tscn"),
+	preload("res://Asteroid/Asteroid5.tscn")
 ]
 
 const smallAsteroids = [
 	preload("res://Asteroid/SmallAsteroid.tscn"),
 	preload("res://Asteroid/SmallAsteroid2.tscn"),
 	preload("res://Asteroid/SmallAsteroid3.tscn"),
-	preload("res://Asteroid/SmallAsteroid4.tscn")
+	preload("res://Asteroid/SmallAsteroid4.tscn"),
+	preload("res://Asteroid/SmallAsteroid5.tscn")
 ]
 
 @export var start_count = 7

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://World.gd" id="1_bxt38"]
 [ext_resource type="PackedScene" uid="uid://bffpo2c8jgu7m" path="res://Player/Player.tscn" id="2_cf0ag"]
-[ext_resource type="AudioStream" uid="uid://rs53ttmvq04f" path="res://Sounds/shoot.wav" id="3_uwm27"]
-[ext_resource type="AudioStream" uid="uid://bgeq4h0qbrf1b" path="res://Sounds/die.wav" id="4_bs3wv"]
-[ext_resource type="AudioStream" uid="uid://j005c2mmcx72" path="res://Sounds/boom.wav" id="5_1tvfy"]
+[ext_resource type="AudioStream" uid="uid://db80wkd5asrvo" path="res://Sounds/shoot.wav" id="3_uwm27"]
+[ext_resource type="AudioStream" uid="uid://b0l4517gis1ev" path="res://Sounds/die.wav" id="4_bs3wv"]
+[ext_resource type="AudioStream" uid="uid://c2yltjcj872ni" path="res://Sounds/boom.wav" id="5_1tvfy"]
 [ext_resource type="PackedScene" uid="uid://dlhxsvg2rp3gm" path="res://TimeDisplay.tscn" id="6_oyy7q"]
 [ext_resource type="FontFile" uid="uid://c754t421vdy1t" path="res://Assets/LaserCorps.otf" id="6_ppo8l"]
 
