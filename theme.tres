@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cur5fs4tj1pas"]
+
+[ext_resource type="FontFile" uid="uid://c754t421vdy1t" path="res://assets/LaserCorps.otf" id="1_ulub0"]
+
+[resource]
+default_font = ExtResource("1_ulub0")
+default_font_size = 24

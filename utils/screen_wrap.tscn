@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://deiujtet2ftbq"]
+
+[ext_resource type="Script" path="res://utils/screen_wrap.gd" id="1_mdfsd"]
+
+[node name="ScreenWrap" type="Node2D"]
+script = ExtResource("1_mdfsd")
